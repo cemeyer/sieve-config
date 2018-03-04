@@ -8,7 +8,7 @@
 #   Previously, the MDA (mail delivery agent) configured in my fetchmailrc was
 #   procmail.
 #
-#   I use a sieve reference as well as procmail2sieve.pl (solely as a
+#   I used a sieve reference as well as procmail2sieve.pl (solely as a
 #   reference, since the generated output was useless) to convert my 700+ line
 #   procmailrc to sieve.  Some things are simply much shorter to express in
 #   Sieve (it has logical expressions and the ability to set the 'read' flag in
@@ -27,7 +27,11 @@
 #   3. Change /etc/dovecot/conf.d/90-sieve.conf to point at my sieve git repo.
 #      It defaults to checking $HOME/.dovecot.sieve, and apparently does not
 #      follow a symlink in that location:
+#
 #          plugin { sieve = file:~/sieve;active=~/src/sieve/dovecot.sieve }
+#
+#      This probably doesn't work as well in a multi-user environment.  Not my
+#      problem.
 #
 #   4. Verify lack of syntax errors with 'sievec': sievec -D dovecot.sieve >/dev/null:
 #      "Debug: sieve: Script `dovecot' from .../dovecot.sieve successfully compiled"
@@ -130,6 +134,7 @@ if anyof (header :contains "List-Id" "freebsd-fs.freebsd.org",
 	  address :is "to" "freebsd-fs@freebsd.org",
 	  address "CC" "freebsd-fs@freebsd.org")
 {
+	# ZFS is wholly irrelevant to me and makes up most -fs@ traffic
 	if header :contains "Subject" "zfs" {
 		addflag "\\Seen";
 	}
