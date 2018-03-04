@@ -110,27 +110,11 @@ if header :contains "List-ID" "devel-announce.lists.fedoraproject.org" {
 
 # Active list subscriptions:
 
-if anyof (header :contains "List-Id" "freebsd-hackers.freebsd.org",
-	  address :is "to" "freebsd-hackers@freebsd.org",
-	  address "CC" "freebsd-hackers@freebsd.org")
-{
-	fileinto "freebsd.hackers@";
-	stop;
-}
-
 if anyof (header :contains "List-Id" "freebsd-arch.freebsd.org",
 	  address :is "to" "freebsd-arch@freebsd.org",
 	  address "CC" "freebsd-arch@freebsd.org")
 {
 	fileinto "freebsd.arch@";
-	stop;
-}
-
-if anyof (header :contains "List-Id" "all-developers.freebsd.org",
-	  address :is "to" "developers@freebsd.org",
-	  address "CC" "developers@freebsd.org")
-{
-	fileinto "freebsd.developers@";
 	stop;
 }
 
@@ -150,6 +134,14 @@ if anyof (header :contains "List-Id" "freebsd-fs.freebsd.org",
 		addflag "\\Seen";
 	}
 	fileinto "freebsd.fs";
+	stop;
+}
+
+if anyof (header :contains "List-Id" "freebsd-hackers.freebsd.org",
+	  address :is "to" "freebsd-hackers@freebsd.org",
+	  address "CC" "freebsd-hackers@freebsd.org")
+{
+	fileinto "freebsd.hackers@";
 	stop;
 }
 
@@ -192,6 +184,14 @@ if anyof (header :contains "List-Id" "freebsd-bugs.freebsd.org",
 	} else {
 		fileinto "freebsd.bugs";
 	}
+	stop;
+}
+
+if anyof (header :contains "List-Id" "all-developers.freebsd.org",
+	  address :is "to" "developers@freebsd.org",
+	  address "CC" "developers@freebsd.org")
+{
+	fileinto "freebsd.developers@";
 	stop;
 }
 
