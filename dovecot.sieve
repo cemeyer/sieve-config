@@ -63,7 +63,9 @@ if anyof (
 		header :matches "Subject" "Amazon Student*"),
 
 	allof (header :contains "From" "news@e.dealextreme.com",
-		header :contains "To" "cemeyer+dx@uw.edu")
+		header :contains "To" "cemeyer+dx@uw.edu"),
+
+	header :contains "From" "jobs@aftercollege.com"
 ) {
 	discard;
 	stop;
