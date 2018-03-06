@@ -66,6 +66,7 @@ if anyof (
 		header :contains "To" "cemeyer+dx@uw.edu"),
 
 	header :contains "From" "jobs@aftercollege.com",
+	header :contains "From" "careernews-editor@acm.org",
 	header :contains "From" "learning@acm.org"
 ) {
 	discard;
