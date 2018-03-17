@@ -67,7 +67,10 @@ if anyof (
 
 	header :contains "From" "jobs@aftercollege.com",
 	header :contains "From" "careernews-editor@acm.org",
-	header :contains "From" "learning@acm.org"
+	header :contains "From" "learning@acm.org",
+
+	allof (header :matches "Subject" "*package -*sysutils/fusefs-lkl* Failed for fusefs-lkl*",
+		header :contains "From" "pkg-fallout@FreeBSD.org")
 ) {
 	discard;
 	stop;
