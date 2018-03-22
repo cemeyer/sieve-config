@@ -235,6 +235,18 @@ if anyof (header :contains "List-Id" "fedora-haskell-list.redhat.com",
 	stop;
 }
 
+if anyof (header :contains "List-Id" "rpmfusion-developers.lists.rpmfusion.org")
+{
+	fileinto "rpmfusion-devel";
+	stop;
+}
+
+if anyof (header :contains "List-Id" "rpmfusion-users.lists.rpmfusion.org")
+{
+	fileinto "rpmfusion";
+	stop;
+}
+
 if allof (header :contains "To" "rpmfusion-package-review@rpmfusion.org",
 	  header :contains "Sender" "rpmfusion-developers-bounces@lists.rpmfusion.org")
 {
