@@ -46,7 +46,7 @@
 #   7. For debugging, /etc/dovecot/conf.d/10-logging.conf:
 #        'mail_debug = yes' and check /var/log/maillog.
 
-require ["fileinto", "regex", "envelope", "reject", "imap4flags"];
+require ["body", "fileinto", "regex", "envelope", "reject", "imap4flags"];
 
 # Drop junk quickly:
 
@@ -97,6 +97,15 @@ if anyof (header :contains "From" "mailinglist@wildbillssportssaloon.com",
 	  header :contains "From" "h.reindl@thelounge.net",
 	  header :contains "From" "valent.turkovic@gmail.com",
 	  header :contains "From" "invitation@zorpia.com")
+{
+	discard;
+	stop;
+}
+
+# Drop duplicate emails from rust Github robot 'bors'
+if allof (header :is "X-GitHub-Sender" "bors",
+	header :contains "From" "notifications@github.com",
+	body :contains ["has been approved by", "Testing commit", "Trying commit"])
 {
 	discard;
 	stop;
