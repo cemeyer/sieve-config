@@ -67,6 +67,9 @@ if anyof (
 
 	header :contains "From" "jobs@aftercollege.com",
 
+	allof (address :contains "from" ["freebsd@pdx.rh.CN85.dnsmgr.net", "rgrimes@freebsd.org"],
+		header :matches "In-Reply-To" "."),
+
 	allof (header :matches "Subject" "*package -*sysutils/fusefs-lkl* Failed for fusefs-lkl*",
 		header :contains "From" "pkg-fallout@FreeBSD.org"),
 
