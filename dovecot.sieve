@@ -204,12 +204,18 @@ if anyof (header :contains "List-Id" "freebsd-bugs.freebsd.org",
 		discard;
 	} elsif header :contains "X-Bugzilla-Flags" "maintainer-feedback?" {
 		discard;
-	} elsif header :contains "Subject" "Problem reports for freebsd-bugs@FreeBSD.org that need special" {
+	} elsif header :contains "Subject" "Problem reports for bugs@FreeBSD.org that need special" {
 		discard;
 	} else {
 		fileinto "freebsd.bugs";
 	}
 	stop;
+}
+
+if allof (header :contains "List-Id" "freebsd-fs.freebsd.org",
+	  header :contains "Subject" "Problem reports for fs@FreeBSD.org that need special")
+{
+	discard;
 }
 
 if anyof (header :contains "List-Id" "all-developers.freebsd.org",
